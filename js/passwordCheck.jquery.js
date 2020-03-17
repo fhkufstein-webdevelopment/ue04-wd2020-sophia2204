@@ -7,12 +7,14 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     this.minLength = 8; //this is what we defined and what we need to consider in our length check
 
+
     //this attributes are set with our constructor
     this.wrapperField = $(wrapperId); // bei jquery $, bei javascript document.getElementbyId
     this.passwordField = $(passwordInputFieldId); // bei jquery $, bei javascript document.getElementbyId
     this.passwordSubmitButton = $(passwordSubmitButtonId); // bei jquery $, bei javascript document.getElementbyId
 
 
+    
     var that = this; //a trick because this is a keyword and means different things in a new context! Especially when you work with events or if you call functions outside your class "this" won't mean you!
 
     //now for the events which should fire:
@@ -69,6 +71,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
             //one could improve this by telling the Developer which Id(s) are null...
         }
     };
+
+
 
     //TODO 2 start
     /*

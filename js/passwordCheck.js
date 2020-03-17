@@ -15,6 +15,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     var that = this; //a trick because this is a keyword and means different things in a new context! Especially when you work with events or if you call functions outside your class "this" won't mean you!
 
+
+
     //TODO start
     //now for the events which should fire:
 
@@ -45,6 +47,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     //TODO end
 
+
+
     this.check = function() {
         //we can only check if every field which with given Id exists
         //one of them would be null if one Id wouldn't exist therefore the following statement would fail
@@ -73,6 +77,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
             //one could improve this by telling the Developer which Id(s) are null...
         }
     };
+
+
 
     /*
     This method should return true if the length of passwordField value is greater or equal to this.minLength
