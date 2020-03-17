@@ -7,7 +7,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     this.minLength = 8; //this is what we defined and what we need to consider in our length check
 
-    //this attributes are set with our constructor
+    //these attributes are set with our constructor
     this.wrapperField = document.getElementById(wrapperId);
     this.passwordField = document.getElementById(passwordInputFieldId);
     this.passwordSubmitButton = document.getElementById(passwordSubmitButtonId);
@@ -17,11 +17,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     //TODO start
     //now for the events which should fire:
-    //if we leave the password field (focus is lost) - JavaScript Method "onblur" for an input field in our case the field this.passwordField
-    //if we enter the password field (focus is set) - JavaScript Method "onfocus" for an input field - again in our case the field this.passwordField
-    //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
-    //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
 
+    //if we leave the password field (focus is lost) - JavaScript Method "onblur" for an input field in our case the field this.passwordField
     this.passwordField.onblur = function() {
         //the keyword "this" is always referring to its context.
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
@@ -31,14 +28,26 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
 
     //TODO implement the other events in the exact same way!
 
+    //if we enter the password field (focus is set) - JavaScript Method "onfocus" for an input field - again in our case the field this.passwordField
+    this.passwordField.onfocus = function () {
+        that.check();
+    };
 
+    //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
+    this.passwordField.onkeyup = function () {
+        that.check();
+    };
 
+    //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
+    this.passwordSubmitButton.onclick = function () {
+        that.check();
+    };
 
     //TODO end
 
     this.check = function() {
         //we can only check if every field which with given Id exists
-        //one of them would be null if one Id wouldn't exist therefore following statement would fail
+        //one of them would be null if one Id wouldn't exist therefore the following statement would fail
         if(this.wrapperField && this.passwordField && this.passwordSubmitButton) {
 
             var longEnough = this.checkForLength();
@@ -71,7 +80,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.checkForLength = function() {
         //@todo
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        return this.passwordField.value.length >= this.minLength;
     };
 
     /*
@@ -81,7 +90,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //@todo
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        var symbols = /[!§$_.:,;]/;
+        return !!this.passwordField.value.match(symbols);
     };
 }
 

@@ -8,9 +8,9 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.minLength = 8; //this is what we defined and what we need to consider in our length check
 
     //this attributes are set with our constructor
-    this.wrapperField = $(wrapperId);
-    this.passwordField = $(passwordInputFieldId);
-    this.passwordSubmitButton = $(passwordSubmitButtonId);
+    this.wrapperField = $(wrapperId); // bei jquery $, bei javascript document.getElementbyId
+    this.passwordField = $(passwordInputFieldId); // bei jquery $, bei javascript document.getElementbyId
+    this.passwordSubmitButton = $(passwordSubmitButtonId); // bei jquery $, bei javascript document.getElementbyId
 
 
     var that = this; //a trick because this is a keyword and means different things in a new context! Especially when you work with events or if you call functions outside your class "this" won't mean you!
@@ -21,22 +21,22 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     //if we are in the password field an enter text - JavaScript Method "onkeyup" or "onkeup" - again in our case the field this.passwordField
     //if we try to click the submit button - JavaScript Method "onclick" - in our case this.passwordSubmitButton
 
-    this.passwordField.blur(function() {
+    this.passwordField.blur(function() { // bei jquery .blur, bei javascript .onblur
         //the keyword "this" is always referring to its context.
         //onblur is an event which happens in "passwordField" -> so the keyword "this" would refer to the passwordField NOT to our class
         //therefore we previously saved "this" in a variable called "that"
         that.check();
     });
 
-    this.passwordField.keydown(function() {
+    this.passwordField.keydown(function() { // bei jquery .keydown, bei javascript .onkeyup
         that.check();
     });
 
-    this.passwordField.focus(function() {
+    this.passwordField.focus(function() { // bei jquery .focus, bei javascript .onfocus
         that.check();
     });
 
-    this.passwordSubmitButton.click(function() {
+    this.passwordSubmitButton.click(function() { // bei jquery .click, bei javascript .onclick
         that.check();
     });
 
@@ -77,7 +77,7 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
     this.checkForLength = function() {
         //@todo
         //have a look at javascript string methods and properties
-        return true; //this needs to be replaced!
+        return this.passwordField.value.length >= this.minLength;
     };
 
     /*
@@ -87,7 +87,8 @@ function PasswordChecker(wrapperId, passwordInputFieldId, passwordSubmitButtonId
         //@todo
         //have a look at javascript string methods and properties
         //you could probably "match" it somehow
-        return true; //this needs to be replaced!
+        var symbols = /[!§$_.:,;]/;
+        return !!this.passwordField.value.match(symbols);
     };
     //TODO 2 end
 }
